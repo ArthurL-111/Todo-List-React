@@ -14,7 +14,8 @@ class ListContainer extends React.Component{
                                           key = {index} 
                                           deleteTask = {this.props.deleteTask}
                                           type = {type}/>
-                            ))}
+                            ))
+                }
             </div>
         );
     }
