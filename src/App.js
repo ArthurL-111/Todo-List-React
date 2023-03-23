@@ -42,12 +42,12 @@ class App extends React.Component {
             this.setState((prev) => ({
                 pending: [...this.state.pending, newTask],
                 completed: prev.completed,
-            }))
+            }));
         } else {
             this.setState((prev) => ({
                 pending: prev.pending,
                 completed: [...this.state.completed, newTask],
-            }))
+            }));
         }
     }
 
@@ -55,11 +55,26 @@ class App extends React.Component {
         this.setState((prev) => ({
             pending: prev.pending.filter(item => item.id !== +id),
             completed: prev.completed.filter(item => item.id !== +id)
-        }))
+        }));
     }
 
-    updateTask = (newTask) => {
-
+    updateTask = (id, newTask) => {
+        this.setState((prev) => ({
+            pending: prev.pending.map(item => {
+                if (item.id === +id) {
+                    return newTask
+                } else {
+                    return item
+                }
+            }),
+            completed: prev.completed.map(item => {
+                if (item.id === +id) {
+                    return newTask
+                } else {
+                    return item
+                }
+            }),
+        }))
     }
 
     render() {
@@ -73,6 +88,7 @@ class App extends React.Component {
                     pendingTasks = {this.state.pending}
                     completedTasks = {this.state.completed}
                     deleteTask = {this.deleteTask}
+                    updateTask = {this.updateTask}
                 />
             </div>
         );

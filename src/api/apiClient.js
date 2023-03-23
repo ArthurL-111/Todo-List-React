@@ -15,7 +15,7 @@ export const addTodo = (newTodo) => {
 export const updateTodo = (id, updatedTodo) => {
     return fetch(URL + `/${id}`, {
         method: "PUT",
-        body: updatedTodo,
+        body: JSON.stringify(updatedTodo),
         headers: { "Content-type": "application/json" },
     }).then((res) => res.json());
 };

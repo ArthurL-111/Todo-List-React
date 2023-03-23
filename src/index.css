@@ -11,3 +11,63 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+li{
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  padding:10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+  background-color: #e6e2d3;
+}
+
+li span{
+  flex-grow: 1;
+  padding-left: 10px;
+  text-align: center;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  flex-basis: 0; 
+}
+
+li input{
+  flex-grow: 1;
+  padding-left: 10px;
+  white-space: nowrap; 
+  flex-basis: 0; 
+}
+
+button {
+  color: white;
+  width: 40px;
+  max-width: 70px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.form button {
+  background-color: #008cba;
+  width: 60px;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+svg {
+  fill: white;
+  width: 22px;
+  pointer-events: none;
+}

@@ -21,3 +21,15 @@
     margin-block-end: 5px;
     margin-left: 15px;
 }
+
+.del_btn {
+    background-color: #c94c4c;
+}
+
+.edit_btn {
+    background-color: #008cba;
+}
+
+.arrow_btn {
+    background-color: #479e4a;
+}

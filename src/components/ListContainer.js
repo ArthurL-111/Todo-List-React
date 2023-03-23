@@ -10,10 +10,12 @@ class ListContainer extends React.Component{
                 <h3 className={styles.list_title}>{type} Tasks</h3>
                 {tasks.map((item, index) => (
                                 <TaskItem content = {item.content} 
+                                          done = {item.done}
                                           id = {item.id} 
                                           key = {index} 
                                           deleteTask = {this.props.deleteTask}
-                                          type = {type}/>
+                                          type = {type}
+                                          updateTask = {this.props.updateTask}/>
                             ))
                 }
             </div>
