@@ -1,0 +1,23 @@
+.list_container {
+    border: 1px #e6e2d3 solid;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.lists_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.list_title {
+    margin-block-start: 10px;
+    margin-block-end: 5px;
+    margin-left: 15px;
+}
