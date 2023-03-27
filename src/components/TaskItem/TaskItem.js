@@ -1,29 +1,26 @@
 import React from 'react'
-import { deleteTodo, updateTodo } from '../api/apiClient';
-import styles from "./list.module.css";
+import styles from "../list.module.css";
 
 class TaskItem extends React.Component {
     state = {
         editing: false,
-        content: this.props.content,
+        todo: this.props.todo,
         id: this.props.id
     }
 
     handleDelete = (e) => {
         e.preventDefault();
-        deleteTodo(this.state.id)
-            .then((res) => {
-                this.props.deleteTask(this.state.id);
-            })
-            .catch((err) => {
-                console.log(`Delete task error: ${err}`);
-            });
+        this.props.handleDelete(this.state.id);
     }
 
     handleUpdate = (e) => {
         e.preventDefault();
         if (!this.state.editing) {
             this.setState({ editing: true });
+        } else {
+            const update_content = e.target.value;
+            this.props.handleUpdate(update_content, this.state.id, this.state.todo.done);
+            this.setState({todo: {...this.state.todo, content: update_content}, editing: false})
         }
     }
 
@@ -31,22 +28,18 @@ class TaskItem extends React.Component {
         e.preventDefault();
         if (this.state.editing){
             const update_content = e.target.value;
-            if (update_content.trim() === ''){
-                alert('Please input content!')
-            } else {
-                updateTodo(this.state.id, {content: update_content, done: this.props.done})
-                    .then((res) => {
-                        this.props.updateTask(this.state.id, {content: update_content, done: this.props.done})
-                    })
-                    .catch((err) => {
-                        console.log(`Update error: ${err}`)
-                    })
-            }
-            this.setState({content: update_content, editing: false})
+            this.props.handleUpdate(update_content, this.state.id, this.state.todo.done);
+            this.setState({todo: {...this.state.todo, content: update_content}, editing: false})
         }
     }
+
+    handleComplete = (e) => {
+        e.preventDefault();
+        this.props.handleComplete(this.state.todo);
+    }
+
     render() {
-        const { editing, content } = this.state;
+        const { editing } = this.state;
         const editIcon_template =  <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24"  aria-label="fontSize small">
                                         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
                                     </svg>
@@ -63,25 +56,25 @@ class TaskItem extends React.Component {
                                     <path d="M9 20L4 15l1.41-1.41L9 17.17l7.59-7.59L18 11l-9 9z"></path>
                                 </svg>
       
-        if (this.props.type === 'Pending') {
+        if (!this.state.todo.done) {
             return (
                 <li>
                     {editing ? 
-                        (<input placeholder={content} onBlur={this.handleBlur} autoFocus/>) : 
-                        (<span>{this.state.content}</span>)
+                        (<input placeholder={this.state.todo.content} onBlur={this.handleBlur} autoFocus/>) : 
+                        (<span>{this.state.todo.content}</span>)
                     }
                     <button className={styles.edit_btn} onClick={this.handleUpdate}> {editing ? doneIcon_template : editIcon_template} </button>
                     <button className={styles.del_btn} onClick={this.handleDelete}> {deleteIcon_template} </button>
-                    <button className={styles.arrow_btn}> {rightIcon_template} </button>
+                    <button className={styles.arrow_btn} onClick={this.handleComplete}> {rightIcon_template} </button>
                 </li>
             );
         } else {
             return (
                 <li>
-                    <button className={styles.arrow_btn}> {leftIcon_template} </button>
+                    <button className={styles.arrow_btn} onClick={this.handleComplete}> {leftIcon_template} </button>
                     {editing ? 
-                        (<input placeholder={content} onBlur={this.handleBlur} autoFocus/>) : 
-                        (<span>{this.state.content}</span>)
+                        (<input placeholder={this.state.todo.content} onBlur={this.handleBlur} autoFocus/>) : 
+                        (<span>{this.state.todo.content}</span>)
                     }
                     <button className={styles.edit_btn} onClick={this.handleUpdate}> {editIcon_template} </button>
                     <button className={styles.del_btn} onClick={this.handleDelete}> {deleteIcon_template} </button>
