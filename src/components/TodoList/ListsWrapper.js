@@ -12,6 +12,7 @@ class ListsWrapper extends React.Component {
     };
 
     render() {
+        console.log('Wrapper rendering...')
         return (
             <React.Fragment>
                 <div className='form_container'>
@@ -27,7 +28,7 @@ class ListsWrapper extends React.Component {
                         {this.props.pendingTasks.map((item, index) => (
                                         <TaskItem todo = {item}
                                                 id = {item.id} 
-                                                key = {index} 
+                                                key = {item.id} 
                                                 handleDelete = {this.props.handleDelete}
                                                 handleUpdate = {this.props.handleUpdate}
                                                 handleComplete = {this.props.handleComplete}
@@ -41,7 +42,7 @@ class ListsWrapper extends React.Component {
                         {this.props.completedTasks.map((item, index) => (
                                         <TaskItem todo = {item}
                                                 id = {item.id} 
-                                                key = {index} 
+                                                key = {item.id} 
                                                 handleDelete = {this.props.handleDelete}
                                                 handleUpdate = {this.props.handleUpdate}
                                                 handleComplete = {this.props.handleComplete}

@@ -19,7 +19,7 @@ class TaskItem extends React.Component {
             this.setState({ editing: true });
         } else {
             const update_content = e.target.value;
-            this.props.handleUpdate(update_content, this.state.id, this.state.todo.done);
+            this.props.handleUpdate(this.state.todo, update_content);
             this.setState({todo: {...this.state.todo, content: update_content}, editing: false})
         }
     }
@@ -28,7 +28,7 @@ class TaskItem extends React.Component {
         e.preventDefault();
         if (this.state.editing){
             const update_content = e.target.value;
-            this.props.handleUpdate(update_content, this.state.id, this.state.todo.done);
+            this.props.handleUpdate(this.state.todo, update_content);
             this.setState({todo: {...this.state.todo, content: update_content}, editing: false})
         }
     }

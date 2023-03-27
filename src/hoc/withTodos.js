@@ -23,7 +23,6 @@ export const withTodos = (WrappedComponent) => {
         }
 
         componentDidUpdate() {
-            console.log(this)
             console.log('updating...');
         }
 
@@ -76,14 +75,15 @@ export const withTodos = (WrappedComponent) => {
                 });
         }
 
-        handleUpdate = (update_content, id, done) => {
-            console.log('Updating...')
+        handleUpdate = (todo, update_content) => {
+            console.log('Updating...');
+            const updatedTodo = {...todo, content: update_content};
             if (update_content.trim() === ''){
                 alert('Please input content!')
             } else {
-                updateTodo(id, {content: update_content, done: done})
+                updateTodo(todo.id, updatedTodo)
                     .then((res) => {
-                        this.updateTask(id, {content: update_content, done: done})
+                        this.updateTask(todo.id, updatedTodo)
                     })
                     .catch((err) => {
                         console.log(`Update error: ${err}`)
@@ -92,6 +92,7 @@ export const withTodos = (WrappedComponent) => {
         }
 
         handleComplete = (todo) => {
+            console.log('Completing...')
             const updatedTodo = {...todo, done: !todo.done};
             console.log('updated todo: ', updatedTodo)
             updateTodo(todo.id, updatedTodo)
